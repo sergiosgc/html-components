@@ -1,0 +1,20 @@
+{
+    "name": "sergiosgc/negotiated-output-components",
+    "description": "Set of HTML components to be used with the negotiated-output templating system",
+    "keywords": ["webapp", "component"],
+    "homepage": "https://github.com/sergiosgc/negotiated-output-components",
+    "license": "MIT",
+    "version": "1.0",
+    "authors": [
+        {
+            "name": "Sérgio Carvalho",
+            "homepage": "https://github.com/sergiosgc"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0"
+    },
+    "autoload": {
+        "psr-4": {"sergiosgc\\": "sergiosgc/"}
+    }
+}
