@@ -36,7 +36,7 @@ if (!isset($tvars['list'])) throw new Exception("List component requires \$tvars
             )
         ));
     } else {
-        $format = isset($column['format']) ? $column['format'] : sprintf('%%<%s>s', $field);
+        $format = isset($column['format']) ? $column['format'] : sprintf('%%<%s>', $field);
         \sergiosgc\printf($format, $row);
     }
 ?>
