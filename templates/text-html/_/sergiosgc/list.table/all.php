@@ -1,4 +1,5 @@
 <?php
+(function($tvars) {
 if (!isset($tvars['list'])) throw new Exception("List component requires \$tvars['list'] to be set");
 ?>
 <?php if (isset($tvars['list']['container'])) ob_start() ?>
@@ -53,4 +54,4 @@ if (isset($tvars['list']['container'])) {
     $container['children'][] = [ 'raw' => ob_get_clean() ];
     print(\app\FormHelper::html($container));
 }
-
+})($tvars);
