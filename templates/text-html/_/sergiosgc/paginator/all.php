@@ -1,4 +1,5 @@
 <?php
+(function($tvars) {
 // Validate inputs
 if (!isset($tvars['paginator'])) throw new Exception('$tvars[\'paginator\'] must be set');
 if (!isset($tvars['paginator']['page'])) throw new Exception('$tvars[\'paginator\'][\'page\'] must be set');
@@ -94,3 +95,4 @@ if ($endPage == $tvars['paginator']['pageCount']) {
         $tvars['paginator']);
 }
 printf('</span>');
+})($tvars);
