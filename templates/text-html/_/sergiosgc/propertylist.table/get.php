@@ -1,15 +1,15 @@
 <?php
 if (!isset($tvars['property-list'])) throw new Exception("Property list component requires \$tvars['property-list'] to be set");
-(function($propertyList) {
-    $GLOBALS['tvars']['html.element'] = [
+$propertyList = $tvars['property-list'];
+\sergiosgc\output\Negotiated::$singleton->template('/_/sergiosgc/html.element/', [ 'html.element' => [
         'element' => 'table',
         '@class' => $tvars['property-list']['class'],
         'children' => [ [
             'element' => 'tbody',
             'children' => array_map(
                 function($column, $columnProperties) use ($propertyList) {
-                    if (!isset($propertyList['value'][$column]) && !isset($columnProperties['links'])) throw new \Exception('property-list value has no field ' . $column);
-                    $value = $propertyList['value'][$column];
+                    if (!array_key_exists($column, $propertyList['value']) && !array_key_exists('links', $columnProperties)) throw new \Exception('property-list value has no field ' . $column);
+                    $value = @$propertyList['value'][$column];
                     if (is_callable($value)) {
                         $td = [ 'element' => 'td', 'children' => [[ 'raw' => call_user_func($value, $column, $columnProperties, $propertyList) ]] ];
                     } elseif (isset($columnProperties['links'])) {
@@ -44,6 +44,4 @@ if (!isset($tvars['property-list'])) throw new Exception("Property list componen
                 array_keys($propertyList['properties']),
                 $propertyList['properties'])
         ] ]
-];
-\sergiosgc\output\Negotiated::$singleton->template('/_/sergiosgc/html.element/');
-})($tvars['property-list']);
+]]);

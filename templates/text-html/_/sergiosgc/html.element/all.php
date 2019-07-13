@@ -26,7 +26,7 @@ if (!isset($tvars['html.element'])) throw new \Exception('Component template req
                         )
                     ))
             ));
-            if ($node['children']) for($i=count($node['children'])-1; $i>=0; $i--) array_push($stack, [ $node['children'][$i], false ]);
+            if (array_key_exists('children', $node)) for($i=count($node['children'])-1; $i>=0; $i--) array_push($stack, [ $node['children'][$i], false ]);
         } elseif (isset($node['text'])) {
             print(htmlspecialchars($node['text']));
         } elseif (isset($node['raw'])) {

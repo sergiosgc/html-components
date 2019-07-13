@@ -1,8 +1,8 @@
 <ul class="<?= isset($tvars['menu']['class']) ? $tvars['menu']['class'] : 'menu' ?>"<?= isset($tvars['menu']['id']) ? ' id="' . $tvars['menu']['id'] . '"' : '' ?>>
 <?php 
 foreach ($tvars['menu']['items'] as $item) { 
-    if ($item['active']) $item['class'] = isset($item['class']) ? $item['class'] . ' active' : 'active';
-    if ($item['submenu']) $item['class'] = isset($item['class']) ? $item['class'] . ' hassubmenu' : 'hassubmenu';
+    if (isset($item['active']) && $item['active']) $item['class'] = isset($item['class']) ? $item['class'] . ' active' : 'active';
+    if (isset($item['submenu']) && $item['submenu']) $item['class'] = isset($item['class']) ? $item['class'] . ' hassubmenu' : 'hassubmenu';
     printf('<li class="%s"><a href="%s">%s</a>%s</li>',
         array_reduce(
             explode('/', $item['href']),
