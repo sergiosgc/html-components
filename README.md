@@ -44,7 +44,7 @@ For a text node, define a `text` entry, with the text.
 For raw HTML, define a `raw` entry with the source code.
 
 For an element entry, define:
-* An **element** entry with the name of the element.
+* An **element** entry with the tag name of the element.
 * An optional set of attribute entries, each named after the attribute name preceded by `@`.
 * An optional `children` entry. If defined, it should be an array of associative arrays, where each associative array is an HTML element as defined in this argument specification.
 
