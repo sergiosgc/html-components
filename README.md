@@ -12,25 +12,21 @@ Example code:
         [ 'property-list' => [
             'class' => 'hostgroup-view',
             'properties' => [
-                'name' => [
-                'label' => _('Name'),    
-                ],
-                'parent' => [
-                'label' => _('Parent'),
-                ],
+                'name' => [ 'label' => _('Name') ],
+                'parent' => [ 'label' => _('Parent') ],
                 'action' => [
-                'label' => _('Actions'),
-                'links' => [
-                    [
-                    'href' => '/host-group/edit/%<id>',
-                    'label' => _('Edit')
-                    ],
-                    [
-                    'href' => '/host-group/%<id>?x-verb=DELETE',
-                    'class' => 'delete',
-                    'label' => _('Delete')
+                    'label' => _('Actions'),
+                    'links' => [
+                        [
+                            'href' => '/host-group/edit/%<id>',
+                            'label' => _('Edit')
+                        ],
+                        [
+                            'href' => '/host-group/%<id>?x-verb=DELETE',
+                            'class' => 'delete',
+                            'label' => _('Delete')
+                        ]
                     ]
-                ]
                 ]
             ],
             'value' => $hostGroup
