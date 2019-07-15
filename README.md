@@ -1,12 +1,47 @@
 # negotiated-output-components
 Set of HTML components to be used with the negotiated-output templating system
 
+## paginator
+paginator produces a paginator, similar to this:
+
+![propertylist.table example](docs/img/paginator.png)
+
+### Example code
+
+    \sergiosgc\output\Negotiated::$singleton->template('/_/sergiosgc/paginator/',
+        [ 'paginator' => [
+            'page' => $currentPage,
+            'pageCount' => $pageCount,
+            'visible' => 3,
+            'queryArgumentsWhitelist' => [ 'q' ]
+    ]]);
+
+### Argument specification
+
+paginator will act on a `paginator` template variable. This variable is an associative array with these mandatory parameters:
+
+* **page** The current page
+* **pageCount** The total number of pages
+
+Additionally, these optional parameters may be defined:
+* **class** HTML class for the paginator. Defaults to `paginator`.
+* **visible** How many pages are visible. Defaults to 3.
+* **linkHref** `\sergiosgc\sprintf` conversion specifier for generating page links. Conversion specifiers my refer to `page` for the linked page, as well as any variable defined in the paginator template variable. Defaults to %&lt;page&gt;
+* **linkLabel** `\sergiosgc\sprintf` conversion specifier for generating page link labels. Conversion specifiers my refer to `page` for the linked page, as well as any variable defined in the paginator template variable. Defaults to %&lt;page&gt;
+* **startLinkLabel** Label for the link to page 1. Defaults to `|<`.
+* **endLinkLabel** Label for the link to the last page. Defaults to `>|`.
+* **skipUpLinkLabel** Label for the link for skipping **visible** pages up. Defaults to `>>`.
+* **skipDownLinkLabel** Label for the link for skipping **visible** pages down. Defaults to `<<`.
+* **preserveQueryArguments** Should links include query arguments? True/False, defaults to false.
+* **queryArgumentsWhitelist** If preserveQueryArguments is false, nevertheless append query arguments in this array to generated links. Defaults to an empty array.
+* **queryArgumentsBlacklist** If preserveQueryArguments is true, nevertheless skip appending query arguments in this array to generated links. Defaults to an empty array.
+
 ## propertylist.table
 propertylist.table transforms an associative array of properties `[ 'property' => $value ]` into a table with one property per row and two columns per row (label and value). Example output:
 
 ![propertylist.table example](docs/img/propertylist.table.png)
 
-Example code: 
+### Example code
 
     \sergiosgc\output\Negotiated::$singleton->template('/_/sergiosgc/propertylist.table/',
         [ 'property-list' => [
@@ -32,7 +67,7 @@ Example code:
             'value' => $hostGroup
     ]]);
 
-Argument specification:
+### Argument specification
 
 propertylist.table will act on the template variable `property-list`. This variable is an associative array containing these entries:
 * **class**(optional) The HTML class of the resulting table
