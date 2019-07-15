@@ -15,7 +15,7 @@ html.element produces generic HTML.
                 [
                     'element' => 'a',
                     '@href' => '/reconfigure/
-                    '@class' => 'button primary',
+                    '@class' => 'button',
                     'children' => [
                         [
                             'text' => _('Reconfigure')
