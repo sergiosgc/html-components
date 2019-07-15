@@ -1,6 +1,53 @@
 # negotiated-output-components
 Set of HTML components to be used with the negotiated-output templating system
 
+## html.element
+
+html.element produces generic HTML.
+
+### Example code
+
+    \sergiosgc\output\Negotiated::$singleton->template('/_/sergiosgc/html.element/', 
+        ['html.element' => [
+            'element' => 'div',
+            '@class' => 'buttons',
+            'children' => [ 
+                [
+                    'element' => 'a',
+                    '@href' => '/reconfigure/
+                    '@class' => 'button primary',
+                    'children' => [
+                        [
+                            'text' => _('Reconfigure')
+                        ]
+                    ]
+                ],
+                [
+                    'element' => 'a',
+                    '@href' => '/launch/
+                    '@class' => 'button primary',
+                    'children' => [
+                        [
+                            'text' => _('Launch')
+                        ]
+                    ]
+                ]
+            ]
+    ]]);
+    
+### Argument specification
+
+html.element will act on a template variable named `html.element`. This variable contains a definition of an HTML node (either an element, HTML source or a text node).
+
+For a text node, define a `text` entry, with the text.
+
+For raw HTML, define a `raw` entry with the source code.
+
+For an element entry, define:
+* An **element** entry with the name of the element.
+* An optional set of attribute entries, each named after the attribute name preceded by `@`.
+* An optional `children` entry. If defined, it should be an array of associative arrays, where each associative array is an HTML element as defined in this argument specification.
+
 ## menu.ul
 
 menu.ul transforms a menu definition into a menu defined as an recursing unordered list, suitable for producing main menus:
