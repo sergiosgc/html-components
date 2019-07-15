@@ -22,11 +22,11 @@ Example code:
                 'label' => _('Actions'),
                 'links' => [
                     [
-                    'href' => \app\Application::singleton()->url('/host-group/edit/%<id>'),
+                    'href' => '/host-group/edit/%<id>',
                     'label' => _('Edit')
                     ],
                     [
-                    'href' => \app\Application::singleton()->url('/host-group/%<id>?x-verb=DELETE'),
+                    'href' => '/host-group/%<id>?x-verb=DELETE',
                     'class' => 'delete',
                     'label' => _('Delete')
                     ]
