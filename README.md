@@ -1,6 +1,63 @@
 # negotiated-output-components
 Set of HTML components to be used with the negotiated-output templating system
 
+## menu.ul
+
+menu.ul transforms a menu definition into a menu defined as an recursing unordered list, suitable for producing main menus:
+
+![propertylist.table example](docs/img/menu.ul.png)
+
+### Example code
+
+    \sergiosgc\output\Negotiated::$singleton->template('/_/sergiosgc/menu.ul/', [
+        'menu' => [ 'items' => [
+            [
+                'href' => '/',
+                'active' => true,
+                'label' => _('Home')
+            ],
+            [
+                'href' => '/hosts/',
+                'label' => _('Hosts'),
+                'submenu' => [
+                    [
+                        'href' => '/host/new/',
+                        'label' => _('New')
+                    ]
+                ]
+            ],
+            [
+                'href' => '/host-groups/',
+                'label' => _('Host Groups'),
+                'submenu' => [
+                    [
+                        'href' => '/host-group/new/',
+                        'label' => _('New')
+                    ]
+                ]
+            ],
+            [
+                'href' => '/services/',
+                'label' => _('Services'),
+                'submenu' => [
+                    [
+                        'href' => '/service/new/',
+                        'label' => _('New')
+                    ]
+                ]
+            ],
+        ]
+    ]);
+
+### Argument specification
+
+menu.ul acts on a template `menu` variable. This is an associative array, with an `items` entry defining the menu.
+
+The `items` entry is an array of menu entries. Each menu entry is an associative array with a mandatory `label` and optional:
+* **href** Link to be applied to label
+* **active** Whether the menu entry is active
+* **submenu** A submenu definition, as an array of menu entries.
+
 ## paginator
 paginator produces a paginator, similar to this:
 
