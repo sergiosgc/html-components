@@ -22,7 +22,7 @@ if (!isset($tvars['list'])) throw new Exception("List component requires \$tvars
     if (is_callable($row)) {
         $row($field, $column);
     } elseif (isset($column['content'])) {
-     throw new Exception('Unimplemented');
+        if (is_callable($column['content'])) print(call_user_func($column['content'], $row, $field)); else \sergiosgc\printf($column['content'], $row[$field]);
     } elseif (isset($column['links'])) {
         print(implode('&nbsp;|&nbsp;',
             array_map(
