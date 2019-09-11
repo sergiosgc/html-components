@@ -5,6 +5,7 @@ if (!isset($tvars['paginator'])) throw new Exception('$tvars[\'paginator\'] must
 if (!isset($tvars['paginator']['page'])) throw new Exception('$tvars[\'paginator\'][\'page\'] must be set');
 if (!isset($tvars['paginator']['pageCount'])) throw new Exception('$tvars[\'paginator\'][\'pageCount\'] must be set');
 foreach([
+    'showOnSinglePage' => true,
     'visible' => 3, 
     'linkHref' => '%<page>', 
     'linkLabel' => '%<page>', 
@@ -18,6 +19,8 @@ foreach([
     'queryArgumentsBlacklist' => []
     ] as $setting => $default) if (!isset($tvars['paginator'][$setting])) $tvars['paginator'][$setting] = $default;
 foreach(['page', 'pageCount', 'visible'] as $setting) $tvars['paginator'][$setting] = (int) $tvars['paginator'][$setting];
+if (0 == $tvars['paginator']['pageCount']) return;
+if (!$tvars['paginator']['showOnSinglePage'] && 1 == $tvars['paginator']['pageCount']) return;
 if ($tvars['paginator']['visible'] % 2 == 0) throw new Exception('$tvars[\'paginator\'][\'visible\'] must be an odd number');
 $queryArgs = [];
 foreach ($_GET as $key => $val) {
