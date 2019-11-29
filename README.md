@@ -180,7 +180,7 @@ paginator will act on a `paginator` template variable. This variable is an assoc
 Additionally, these optional parameters may be defined:
 * **class** HTML class for the paginator. Defaults to `paginator`.
 * **visible** How many pages are visible. Defaults to 3.
-* **linkHref** `\sergiosgc\sprintf` conversion specifier for generating page links. Conversion specifiers my refer to `page` for the linked page, as well as any variable defined in the paginator template variable. Defaults to %&lt;page&gt;
+* **linkHref** `\sergiosgc\sprintf` conversion specifier for generating page links. Conversion specifiers may refer to `page` for the linked page, as well as any variable defined in the paginator template variable. Defaults to %&lt;page&gt;
 * **linkLabel** `\sergiosgc\sprintf` conversion specifier for generating page link labels. Conversion specifiers my refer to `page` for the linked page, as well as any variable defined in the paginator template variable. Defaults to %&lt;page&gt;
 * **startLinkLabel** Label for the link to page 1. Defaults to `|<`.
 * **endLinkLabel** Label for the link to the last page. Defaults to `>|`.
