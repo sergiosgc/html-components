@@ -8,11 +8,25 @@ $propertyList = $tvars['property-list'];
             'element' => 'tbody',
             'children' => array_map(
                 function($column, $columnProperties) use ($propertyList) {
-                    if (!array_key_exists($column, $propertyList['value']) && !array_key_exists('links', $columnProperties)) throw new \Exception('property-list value has no field ' . $column);
+                    if (!array_key_exists($column, $propertyList['value']) && 
+                        !array_key_exists('content', $columnProperties) &&
+                        !array_key_exists('links', $columnProperties)) throw new \Exception('property-list value has no field ' . $column);
+
                     $value = @$propertyList['value'][$column];
                     if (is_callable($value)) {
                         $td = [ 'element' => 'td', 'children' => [[ 'raw' => call_user_func($value, $column, $columnProperties, $propertyList) ]] ];
+                    } elseif (isset($columnProperties['content'])) {
+                        $td = [ 'element' => 'td', 'children' => [[ 'raw' => 
+                            is_callable($columnProperties['content']) ?
+                                call_user_func($columnProperties['content'], $value, $column, $columnProperties, $propertyList['value'], $propertyList) :
+                                \sergiosgc\printf($columnProperties['content'], $value)
+                        ]] ];
                     } elseif (isset($columnProperties['links'])) {
+                        if (is_callable($columnProperties['links'])) {
+                            $links = call_user_func($columnProperties['links'], $value, $column, $columnProperties, $propertyList['value'], $propertyList);
+                        } else {
+                            $links = $columnProperties['links'];
+                        }
                         $td = [ 'element' => 'td', 'children' => [[ 'raw' => implode('&nbsp;|&nbsp;',
                             array_map(
                                 function($link) use ($propertyList) {
@@ -22,7 +36,7 @@ $propertyList = $tvars['property-list'];
                                         \sergiosgc\sprintf(strtr($link['label'], [ ' ' => '&nbsp;' ]), $propertyList['value'])
                                     );
                                 },
-                                $columnProperties['links']
+                                $links
                             )
                         ) ]] ];
                     } else {
