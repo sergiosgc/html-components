@@ -30,6 +30,12 @@ foreach ($_GET as $key => $val) {
         $queryArgs[$key] = $val;
     }
 }
+if (strpos($tvars['paginator']['linkHref'], '#')) {
+    list($tvars['paginator']['linkHref'], $tvars['paginator']['linkHash']) = explode('#', $tvars['paginator']['linkHref'], 2);
+    $tvars['paginator']['linkHash'] = '#' . $tvars['paginator']['linkHash'];
+} else {
+    $tvars['paginator']['linkHash'] = '';
+}
 if (count($queryArgs)) {
     $tvars['paginator']['linkHref'] .= 
         (strpos($tvars['paginator']['linkHref'], '?') === FALSE ? '?' : '&') . 
@@ -57,8 +63,9 @@ if ($startPage == 1) {
         \sergiosgc\sprintf($tvars['paginator']['startLinkLabel'], $tvars['paginator']),
         $tvars['paginator']);
 } else {
-    \sergiosgc\printf('<span class="%<class>-start"><a href="%s">%s</a></span>', 
+    \sergiosgc\printf('<span class="%<class>-start"><a href="%s%s">%s</a></span>', 
         \sergiosgc\sprintf($tvars['paginator']['linkHref'], array_merge($tvars['paginator'], [ 'page' => 1 ])),
+        $tvars['paginator']['linkHash'],
         \sergiosgc\sprintf($tvars['paginator']['startLinkLabel'], array_merge($tvars['paginator'], [ 'page' => 1 ])),
         $tvars['paginator']);
 }
@@ -67,14 +74,16 @@ if ($startPage - ($tvars['paginator']['visible'] - 1) / 2 <= 1) {
         \sergiosgc\sprintf($tvars['paginator']['skipDownLinkLabel'], $tvars['paginator']),
         $tvars['paginator']);
 } else {
-    \sergiosgc\printf('<span class="%<class>-skipDown"><a href="%s">%s</a></span>', 
+    \sergiosgc\printf('<span class="%<class>-skipDown"><a href="%s%s">%s</a></span>', 
         \sergiosgc\sprintf($tvars['paginator']['linkHref'], array_merge( $tvars['paginator'], ['page' => max(1, $tvars['paginator']['page'] - $tvars['paginator']['visible']) ])),
+        $tvars['paginator']['linkHash'],
         \sergiosgc\sprintf($tvars['paginator']['skipDownLinkLabel'], array_merge( $tvars['paginator'], ['page' => max(1, $tvars['paginator']['page'] - $tvars['paginator']['visible']) ])),
         $tvars['paginator']);
 }
-for ($page = $startPage; $page <= $endPage; $page++) \sergiosgc\printf('<span class="%<class>-page%s"><a href="%s">%s</a></span>', 
+for ($page = $startPage; $page <= $endPage; $page++) \sergiosgc\printf('<span class="%<class>-page%s"><a href="%s%s">%s</a></span>', 
         $page == $tvars['paginator']['page'] ? ' current' : '',
         \sergiosgc\sprintf($tvars['paginator']['linkHref'], array_merge($tvars['paginator'], [ 'page' => $page ])),
+        $tvars['paginator']['linkHash'],
         \sergiosgc\sprintf($tvars['paginator']['linkLabel'], array_merge($tvars['paginator'], [ 'page' => $page ])),
         $tvars['paginator']);
 if ($endPage + ($tvars['paginator']['visible'] - 1) / 2 >= $tvars['paginator']['pageCount']) {
@@ -82,8 +91,9 @@ if ($endPage + ($tvars['paginator']['visible'] - 1) / 2 >= $tvars['paginator']['
         \sergiosgc\sprintf($tvars['paginator']['skipUpLinkLabel'], $tvars['paginator']),
         $tvars['paginator']);
 } else {
-    \sergiosgc\printf('<span class="%<class>-skipUp"><a href="%s">%s</a></span>', 
+    \sergiosgc\printf('<span class="%<class>-skipUp"><a href="%s%s">%s</a></span>', 
         \sergiosgc\sprintf($tvars['paginator']['linkHref'], array_merge( $tvars['paginator'], ['page' => min($tvars['paginator']['pageCount'], $tvars['paginator']['page'] + $tvars['paginator']['visible']) ])),
+        $tvars['paginator']['linkHash'],
         \sergiosgc\sprintf($tvars['paginator']['skipUpLinkLabel'], array_merge( $tvars['paginator'], ['page' => min($tvars['paginator']['pageCount'], $tvars['paginator']['page'] + $tvars['paginator']['visible']) ])),
         $tvars['paginator']);
 }
@@ -92,8 +102,9 @@ if ($endPage == $tvars['paginator']['pageCount']) {
         \sergiosgc\sprintf($tvars['paginator']['endLinkLabel'], $tvars['paginator']),
         $tvars['paginator']);
 } else {
-    \sergiosgc\printf('<span class="%<class>-end"><a href="%s">%s</a></span>', 
+    \sergiosgc\printf('<span class="%<class>-end"><a href="%s%s">%s</a></span>', 
         \sergiosgc\sprintf($tvars['paginator']['linkHref'], array_merge($tvars['paginator'], [ 'page' => $tvars['paginator']['pageCount'] ])),
+        $tvars['paginator']['linkHash'],
         \sergiosgc\sprintf($tvars['paginator']['endLinkLabel'], array_merge($tvars['paginator'], [ 'page' => $tvars['paginator']['pageCount'] ])),
         $tvars['paginator']);
 }
