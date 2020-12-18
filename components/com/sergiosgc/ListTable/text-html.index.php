@@ -1,12 +1,7 @@
-<?php
-(function($tvars) {
-if (!isset($tvars['list'])) throw new Exception("List component requires \$tvars['list'] to be set");
-?>
-<?php if (isset($tvars['list']['container'])) ob_start() ?>
 <table>
  <thead>
   <tr>
-<?php foreach ($tvars['list']['columns'] as $field => $column) { ?>
+<?php foreach ($listTable['columns'] as $field => $column) { ?>
    <th class="<?= htmlspecialchars(isset($column['class']) ? $column['class'] : $field) ?>">
     <?= htmlspecialchars(isset($column['label']) ? $column['label'] : $field) ?>
    </th>
@@ -14,9 +9,9 @@ if (!isset($tvars['list'])) throw new Exception("List component requires \$tvars
   </tr>
  </thead>
  <tbody>
-<?php foreach ($tvars['list']['rows'] as $row) { ?>
+<?php foreach ($listTable['rows'] as $row) { ?>
   <tr>
-<?php foreach ($tvars['list']['columns'] as $field => $column) { ?>
+<?php foreach ($listTable['columns'] as $field => $column) { ?>
    <td class="<?= htmlspecialchars(isset($column['class']) ? $column['class'] : $field) ?>">
 <?php
     if (is_callable($row)) {
@@ -33,7 +28,7 @@ if (!isset($tvars['list'])) throw new Exception("List component requires \$tvars
                         \sergiosgc\sprintf(strtr($link['label'], [ ' ' => '&nbsp;' ]), $row)
                     );
                 },
-                $column['links']
+                is_callable($column['links']) ? call_user_func($column['links'], $row, $field) : $column['links']
             )
         ));
     } else {
@@ -45,13 +40,8 @@ if (!isset($tvars['list'])) throw new Exception("List component requires \$tvars
 <?php } ?>
   </tr>
 <?php } ?>
+<?php if (isset($listTable['emptymessage']) && 0 == count($listTable['rows'])) { ?>
+ <tr><td class="emptymessage" colspan="<?= count($listTable['columns']) ?>"><?= $listTable['emptymessage' ] ?></td></tr>
+<?php } ?>
  </tbody>
 </table> 
-<?php 
-if (isset($tvars['list']['container'])) {
-    $container = $tvars['list']['container'];
-    if (!isset($container['children'])) $container['children'] = [];
-    $container['children'][] = [ 'raw' => ob_get_clean() ];
-    print(\app\FormHelper::html($container));
-}
-})($tvars);

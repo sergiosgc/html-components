@@ -1,0 +1,2 @@
+<?php
+$listTable = $_REQUEST;

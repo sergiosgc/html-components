@@ -1,0 +1,2 @@
+<?php
+$paginator = $_REQUEST;
