@@ -8,7 +8,7 @@ printf(<<<EOS
 EOS
     , $_REQUEST['class'], 
         \sergiosgc\ArrayAdapter::from($_REQUEST['properties'] ?? [])->map(function($property, $propertyName) {
-            return [ 'class' => sprintf('%s-%s', $_REQUEST['class'], $propertyName), 'label' => $property['label'] ];
+            return [ 'class' => sprintf('%s-%s', $_REQUEST['class'], $propertyName), 'label' => $property['label'] ?? $property['title'] ];
         })->zip(
             \sergiosgc\ArrayAdapter::from($_REQUEST['properties'] ?? [])->map(function($property, $propertyName) {
                 if (!array_key_exists($propertyName, $_REQUEST['value']) && 
