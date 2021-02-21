@@ -1,4 +1,8 @@
 <?php
+foreach($_REQUEST as $key => $val) { 
+    if (in_array($key, ['tagname', 'content', 'properties'])) continue;
+    $_REQUEST['properties'][$key] = $val;
+}
 print('<');
 print(implode(' ', array_filter(array_merge(
     [ $_REQUEST['tagname'] ],
