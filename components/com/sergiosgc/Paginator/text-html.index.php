@@ -6,7 +6,7 @@ foreach([
     'showonsinglepage' => true,
     'visible' => 3, 
     'linkhref' => '%<page>', 
-    'liklabel' => '%<page>', 
+    'linklabel' => '%<page>', 
     'startlinklabel' => '|&lt;',
     'endlinklabel' => '&gt;|',
     'skipuplinklabel' => '&gt;&gt;',
@@ -85,7 +85,7 @@ for ($page = $startPage; $page <= $endPage; $page++) \sergiosgc\printf('<span cl
         $page == $paginator['page'] ? ' current' : '',
         \sergiosgc\sprintf($paginator['linkhref'], array_merge($paginator, [ 'page' => $page ])),
         $paginator['linkHash'],
-        \sergiosgc\sprintf($paginator['liklabel'], array_merge($paginator, [ 'page' => $page ])),
+        \sergiosgc\sprintf($paginator['linklabel'], array_merge($paginator, [ 'page' => $page ])),
         $paginator);
 if ($endPage + ($paginator['visible'] - 1) / 2 >= $paginator['pagecount']) {
     \sergiosgc\printf('<span class="%<class>-skipUp %<class>-nolink">%s</span>', 
