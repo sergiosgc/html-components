@@ -24,7 +24,7 @@ if ($paginator['visible'] % 2 == 0) throw new Exception('$tvars[\'paginator\'][\
 $paginator['queryargumentswhitelist'] = is_array($paginator['queryargumentswhitelist']) ? $paginator['queryargumentswhitelist'] : explode(',', (string) $paginator['queryargumentswhitelist']);
 $paginator['queryargumentsblacklist'] = is_array($paginator['queryargumentsblacklist']) ? $paginator['queryargumentsblacklist'] : explode(',', (string) $paginator['queryargumentsblacklist']);
 $queryArgs = [];
-foreach ($_GET as $key => $val) {
+foreach (array_merge(['page' => $paginator['page'] ?? 1], $_GET) as $key => $val) {
     if ($paginator['preservequeryarguments'] && !in_array($key, $paginator['queryargumentsblacklist']) ||
         !$paginator['preservequeryarguments'] && in_array($key, $paginator['queryargumentswhitelist'])) {
 
