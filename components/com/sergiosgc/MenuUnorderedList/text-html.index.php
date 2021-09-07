@@ -30,6 +30,13 @@ $items = array_map(
 ?><ul class="<?= strtr(@$class, [ '&' => '&amp;', '"' => '&quot;' ]) ?>" id="<?= strtr(@$id, [ '&' => '&amp;', '"' => '&quot;' ]) ?>"><?php ob_start();?><?php foreach ($items as $item) { ?><li class="<?= strtr(@$item['class'], [ '&' => '&amp;', '"' => '&quot;' ]) ?>"><?php ob_start();?><a href="<?= strtr(@$item['href'], [ '&' => '&amp;', '"' => '&quot;' ]) ?>"><?php ob_start();print(@$item['label']);print(ob_get_clean()); print('</a>'); // a
 ?><?php  if ($item['submenu']) { ?><?php ob_start(); // com/sergiosgc/MenuUnorderedList
 
+\app\Template::componentPre(
+    'com/sergiosgc/MenuUnorderedList',
+    [
+        'items' => @$item['submenu']
+    ]
+);
+
 \app\Template::component(
     'com/sergiosgc/MenuUnorderedList',
     [
