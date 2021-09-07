@@ -1,0 +1,1 @@
+<div class="com-sergiosgc-tab <?php echo $_REQUEST['active'] ? "com-sergiosgc-tab-active" : "com-sergiosgc-tab-inactive" ?>" data-label="<?php echo htmlspecialchars($_REQUEST['label']) ?>" data-name="<?php echo htmlspecialchars($_REQUEST['name']) ?>"><?php echo $_REQUEST['content'] ?></div>
