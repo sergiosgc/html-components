@@ -19,6 +19,18 @@
     } elseif (isset($column['content'])) {
         if (is_callable($column['content'])) print(call_user_func($column['content'], $row, $field)); else \sergiosgc\printf($column['content'], $row[$field]);
     } elseif (isset($column['links'])) {
+        /*return sprintf('<ul class="com-sergiosgc-propertylist-table-links">%s</ul>', \sergiosgc\ArrayAdapter::from(
+            is_callable($column['links'])
+                ? call_user_func($column['links'], $row, $field, $_REQUEST)
+                : $column['links']
+        )->map(function($link) {
+            return sprintf('<li><a%s href="%s">%s</a></li>', 
+                isset($link['class']) ? sprintf(' class="%s"', $link['class']) : '',
+                \sergiosgc\sprintf($link['href'], $row),
+                \sergiosgc\sprintf(strtr($link['label'], [ ' ' => '&nbsp;' ]), $row)
+            );
+        })->implode(''));
+        */
         print(implode('&nbsp;|&nbsp;',
             array_map(
                 function($link) use ($row) {

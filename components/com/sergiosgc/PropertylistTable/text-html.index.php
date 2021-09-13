@@ -23,17 +23,17 @@ EOS
                                 ? call_user_func($property['content'], $value, $propertyName, $property, $_REQUEST['value'], $_REQUEST)
                                 : \sergiosgc\printf($property['content'], $value);
                     } elseif (isset($property['links'])) {
-                        return \sergiosgc\ArrayAdapter::from(
+                        return sprintf('<ul class="com-sergiosgc-propertylist-table-links">%s</ul>', \sergiosgc\ArrayAdapter::from(
                             is_callable($property['links'])
                                 ? call_user_func($property['links'], $value, $propertyName, $property, $_REQUEST['value'], $_REQUEST)
                                 : $property['links']
                         )->map(function($link) {
-                            return sprintf('<a%s href="%s">%s</a>', 
+                            return sprintf('<li><a%s href="%s">%s</a></li>', 
                                 isset($link['class']) ? sprintf(' class="%s"', $link['class']) : '',
                                 \sergiosgc\sprintf($link['href'], $_REQUEST['value']),
                                 \sergiosgc\sprintf(strtr($link['label'], [ ' ' => '&nbsp;' ]), $_REQUEST['value'])
                             );
-                        })->implode('&nbsp;|&nbsp;');
+                        })->implode(''));
                     } else {
                         return \sergiosgc\sprintf(
                             $property['format'] ?? false ? $property['format'] : sprintf('%%<%s>', $propertyName), 
