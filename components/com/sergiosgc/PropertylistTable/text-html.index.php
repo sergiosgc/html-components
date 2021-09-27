@@ -6,7 +6,7 @@ printf(<<<EOS
  </tbody>
 </table>
 EOS
-    , $_REQUEST['class'], 
+    , $_REQUEST['class'] ?? "sergiosgc-propertylisttable", 
         \sergiosgc\ArrayAdapter::from($_REQUEST['properties'] ?? [])->map(function($property, $propertyName) {
             return [ 'class' => sprintf('%s-%s', $_REQUEST['class'], $propertyName), 'label' => $property['label'] ?? $property['title'] ];
         })->zip(
