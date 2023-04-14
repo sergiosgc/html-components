@@ -11,9 +11,9 @@ EOS
             return [ 'class' => sprintf('%s-%s', $_REQUEST['class'], $propertyName), 'label' => $property['label'] ?? $property['title'] ];
         })->zip(
             \sergiosgc\ArrayAdapter::from($_REQUEST['properties'] ?? [])->map(function($property, $propertyName) {
-                if (!array_key_exists($propertyName, $_REQUEST['value']) && 
-                    !array_key_exists('content', $property) &&
-                    !array_key_exists('links', $property)) throw new \Exception('No value set for field ' . $propertyName);
+                if (!array_key_exists($propertyName, (array) $_REQUEST['value']) && 
+                    !array_key_exists('content', (array) $property) &&
+                    !array_key_exists('links', (array) $property)) throw new \Exception('No value set for field ' . $propertyName);
                     
                     $value = $_REQUEST['value'][$propertyName] ?? null;
                     if (is_callable($value)) {
