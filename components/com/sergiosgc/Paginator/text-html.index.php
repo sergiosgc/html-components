@@ -40,14 +40,12 @@ if (strpos($paginator['linkhref'], '#')) {
 if (count($queryArgs)) {
     $paginator['linkhref'] .= 
         (strpos($paginator['linkhref'], '?') === FALSE ? '?' : '&') . 
-        strtr(
             implode('&', array_map(
                 function($key, $val) {
                     return sprintf('%s=%s', urlencode($key), urlencode($val));
                 },
                 array_keys($queryArgs),
-                $queryArgs)),
-                [ '%' => '%%' ]);
+                $queryArgs));
 }
 // Output
 printf('<span class="%s">', $paginator['class']);
